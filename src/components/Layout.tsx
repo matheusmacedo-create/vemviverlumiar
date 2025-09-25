@@ -2,14 +2,13 @@ import React from 'react';
 import { MadeWithDyad } from '@/components/made-with-dyad';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button'; // Importando Button do shadcn/ui
-import { Facebook, Instagram, Youtube } from 'lucide-react'; // Importando ícones (MountainIcon removido)
+import { Facebook, Instagram, Youtube } from 'lucide-react'; // Importando ícones
 
 const Header = () => (
   <header className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white p-4 shadow-lg">
     <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
       <Link to="/" className="flex items-center gap-2 text-2xl font-bold hover:opacity-80 transition-opacity">
-        <img src="/logo.png" alt="Vem Viver Lumiar Logo" className="h-10 w-auto" /> {/* Logo adicionada */}
-        <span>Vem Viver Lumiar</span>
+        <img src="/logo.png" alt="Vem Viver Lumiar Logo" className="h-10 w-auto" /> {/* Apenas a logo */}
       </Link>
       <nav className="flex-grow">
         <ul className="flex flex-wrap justify-center md:justify-end items-center gap-6 text-lg">
@@ -32,8 +31,7 @@ const Footer = () => (
       {/* Coluna 1: Logo e Descrição */}
       <div className="flex flex-col items-center md:items-start">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white mb-4">
-          <img src="/logo.png" alt="Vem Viver Lumiar Logo" className="h-10 w-auto" /> {/* Logo adicionada */}
-          <span>Vem Viver Lumiar</span>
+          <img src="/logo.png" alt="Vem Viver Lumiar Logo" className="h-10 w-auto" /> {/* Apenas a logo */}
         </Link>
         <p className="text-sm leading-relaxed mb-4">
           Descubra a essência de Lumiar. Conectando você aos melhores locais e experiências autênticas na Serra Fluminense.
