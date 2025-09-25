@@ -1,5 +1,6 @@
 import React from 'react';
 import { MadeWithDyad } from '@/components/made-with-dyad';
+import { Link } from 'react-router-dom'; // Importando Link para navegação
 
 const Header = () => (
   <header className="bg-secondary text-secondary-foreground p-4 shadow-md">
@@ -20,6 +21,10 @@ const Header = () => (
 const Footer = () => (
   <footer className="bg-secondary text-secondary-foreground p-4 text-center shadow-inner mt-8">
     <div className="container mx-auto">
+      <div className="flex justify-center space-x-4 mb-2">
+        <Link to="/politica-de-privacidade" className="hover:underline text-sm">Política de Privacidade</Link>
+        <Link to="/termos-de-uso" className="hover:underline text-sm">Termos de Uso</Link>
+      </div>
       <p>&copy; {new Date().getFullYear()} Vem Viver Lumiar. Todos os direitos reservados.</p>
       <MadeWithDyad />
     </div>
