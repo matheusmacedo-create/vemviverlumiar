@@ -14,7 +14,7 @@ const Index = () => {
             <h1 className="text-5xl font-extrabold mb-4 leading-tight">Viva Lumiar como um local</h1>
             <p className="text-xl mb-8 max-w-2xl mx-auto">Plataforma que conecta pessoas aos melhores locais e experiências em Lumiar, com foco em conteúdo relevante e engajamento.</p>
             <div className="flex justify-center space-x-4">
-              <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-8 py-6 rounded-full shadow-lg">
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-white text-lg px-8 py-6 rounded-full shadow-lg"> {/* Changed to bg-accent */}
                 Descobrir Lumiar <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary text-lg px-8 py-6 rounded-full shadow-lg">

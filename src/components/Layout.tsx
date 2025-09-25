@@ -4,7 +4,7 @@ import { MadeWithDyad } from '@/components/made-with-dyad';
 const Header = () => (
   <header className="bg-primary text-primary-foreground p-4 shadow-md">
     <div className="container mx-auto flex justify-between items-center">
-      <h1 className="text-2xl font-bold">Vem Viver Lumiar</h1>
+      <img src="/logo.png" alt="Vem Viver Lumiar Logo" className="h-10" /> {/* Logo added here */}
       <nav>
         <ul className="flex space-x-4">
           <li><a href="#" className="hover:underline">Locais</a></li>
