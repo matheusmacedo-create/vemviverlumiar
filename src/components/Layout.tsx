@@ -2,9 +2,9 @@ import React from 'react';
 import { MadeWithDyad } from '@/components/made-with-dyad';
 
 const Header = () => (
-  <header className="bg-primary text-primary-foreground p-4 shadow-md">
+  <header className="bg-secondary text-secondary-foreground p-4 shadow-md">
     <div className="container mx-auto flex justify-between items-center">
-      <img src="/logo.png" alt="Vem Viver Lumiar Logo" className="h-12" /> {/* Logo increased to h-12 */}
+      <img src="/logo.png" alt="Vem Viver Lumiar Logo" className="h-12" />
       <nav>
         <ul className="flex space-x-4">
           <li><a href="#" className="hover:underline">Locais</a></li>
