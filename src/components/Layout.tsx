@@ -2,24 +2,24 @@ import React from 'react';
 import { MadeWithDyad } from '@/components/made-with-dyad';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button'; // Importando Button do shadcn/ui
-import { MountainIcon, Facebook, Instagram, Youtube } from 'lucide-react'; // Importando ícones
+import { Facebook, Instagram, Youtube } from 'lucide-react'; // Importando ícones (MountainIcon removido)
 
 const Header = () => (
-  <header className="bg-gradient-to-r from-primary to-blue-600 text-primary-foreground p-4 shadow-lg">
+  <header className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white p-4 shadow-lg">
     <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
       <Link to="/" className="flex items-center gap-2 text-2xl font-bold hover:opacity-80 transition-opacity">
-        <MountainIcon className="h-8 w-8" />
+        <img src="/logo.png" alt="Vem Viver Lumiar Logo" className="h-10 w-auto" /> {/* Logo adicionada */}
         <span>Vem Viver Lumiar</span>
       </Link>
       <nav className="flex-grow">
         <ul className="flex flex-wrap justify-center md:justify-end items-center gap-6 text-lg">
-          <li><a href="#" className="hover:underline hover:text-accent transition-colors">Locais</a></li>
-          <li><a href="#" className="hover:underline hover:text-accent transition-colors">Agenda</a></li>
-          <li><a href="#" className="hover:underline hover:text-accent transition-colors">Roteiros</a></li>
-          <li><a href="#" className="hover:underline hover:text-accent transition-colors">App</a></li>
+          <li><a href="#" className="hover:underline hover:text-gray-200 transition-colors">Locais</a></li>
+          <li><a href="#" className="hover:underline hover:text-gray-200 transition-colors">Agenda</a></li>
+          <li><a href="#" className="hover:underline hover:text-gray-200 transition-colors">Roteiros</a></li>
+          <li><a href="#" className="hover:underline hover:text-gray-200 transition-colors">App</a></li>
         </ul>
       </nav>
-      <Button variant="secondary" className="mt-4 md:mt-0 px-6 py-2 rounded-full shadow-md hover:bg-secondary/90 transition-colors">
+      <Button variant="outline" className="mt-4 md:mt-0 px-6 py-2 rounded-full shadow-md text-white border-white hover:bg-white hover:text-emerald-600 transition-colors">
         Baixar App
       </Button>
     </div>
@@ -32,7 +32,7 @@ const Footer = () => (
       {/* Coluna 1: Logo e Descrição */}
       <div className="flex flex-col items-center md:items-start">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white mb-4">
-          <MountainIcon className="h-8 w-8" />
+          <img src="/logo.png" alt="Vem Viver Lumiar Logo" className="h-10 w-auto" /> {/* Logo adicionada */}
           <span>Vem Viver Lumiar</span>
         </Link>
         <p className="text-sm leading-relaxed mb-4">
