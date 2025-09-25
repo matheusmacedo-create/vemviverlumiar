@@ -3,42 +3,84 @@ import Layout from '@/components/Layout';
 
 const TermsOfService = () => {
   const companyName = "mm importados";
-  const companyCNPJ = "4430059901"; // Assuming this is a CNPJ or similar identifier
+  const companyCNPJ = "4430059901"; 
 
   return (
     <Layout>
-      <div className="container mx-auto p-6 bg-white rounded-lg shadow-md">
+      <div className="container mx-auto p-6 bg-white rounded-lg shadow-md prose max-w-none">
         <h1 className="text-4xl font-bold mb-6 text-primary">Termos de Uso</h1>
+        <p className="mb-4 text-lg"><strong>Última atualização: 20 de agosto de 2024</strong></p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Aceitação dos termos</h2>
         <p className="mb-4 text-lg">
-          Bem-vindo ao Vem Viver Lumiar! Estes termos e condições descrevem as regras e regulamentos para o uso do site de {companyName}, localizado em <a href="/" className="text-blue-600 hover:underline">Vem Viver Lumiar</a>.
+          Ao usar o <strong>Vem Viver Lumiar</strong>, você concorda com estes termos. Se não concordar, não use nossos serviços.
         </p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Descrição do serviço</h2>
         <p className="mb-4 text-lg">
-          Ao acessar este site, presumimos que você aceita estes termos e condições. Não continue a usar Vem Viver Lumiar se você não concordar em aceitar todos os termos e condições declarados nesta página.
+          Fornecemos uma plataforma para descobrir, avaliar e compartilhar informações sobre locais e experiências em Lumiar, Nova Friburgo, RJ.
         </p>
-        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Licença</h2>
-        <p className="mb-4 text-lg">
-          Salvo indicação em contrário, {companyName} e/ou seus licenciadores detêm os direitos de propriedade intelectual para todo o material em Vem Viver Lumiar. Todos os direitos de propriedade intelectual são reservados. Você pode acessar isso de Vem Viver Lumiar para seu uso pessoal, sujeito às restrições definidas nestes termos e condições.
-        </p>
-        <p className="mb-4 text-lg">Você não deve:</p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Cadastro e conta</h2>
+        <p className="mb-4 text-lg"><strong>Para criar uma conta você deve:</strong></p>
         <ul className="list-disc list-inside mb-4 pl-4 text-lg">
-          <li>Republicar material de Vem Viver Lumiar</li>
-          <li>Vender, alugar ou sublicenciar material de Vem Viver Lumiar</li>
-          <li>Reproduzir, duplicar ou copiar material de Vem Viver Lumiar</li>
-          <li>Redistribuir conteúdo de Vem Viver Lumiar</li>
+          <li>Ter pelo menos 13 anos</li>
+          <li>Fornecer informações verdadeiras</li>
+          <li>Manter suas credenciais seguras</li>
+          <li>Notificar sobre uso não autorizado</li>
         </ul>
-        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Comentários</h2>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Uso aceitável</h2>
+        <p className="mb-4 text-lg"><strong>Você pode:</strong></p>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li>Usar o serviço para fins pessoais</li>
+          <li>Compartilhar fotos e avaliações próprias</li>
+          <li>Interagir respeitosamente com a comunidade</li>
+        </ul>
+        <p className="mb-4 text-lg"><strong>Você NÃO pode:</strong></p>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li>Publicar conteúdo ofensivo, falso ou ilegal</li>
+          <li>Usar para fins comerciais sem autorização</li>
+          <li>Interferir no funcionamento da plataforma</li>
+          <li>Violar direitos de terceiros</li>
+          <li>Criar múltiplas contas falsas</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Conteúdo do usuário</h2>
+        <p className="mb-4 text-lg"><strong>Ao publicar conteúdo:</strong></p>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li>Você mantém a propriedade</li>
+          <li>Nos concede licença para uso na plataforma</li>
+          <li>Garante que possui os direitos necessários</li>
+          <li>Aceita que pode ser moderado ou removido</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Propriedade intelectual</h2>
         <p className="mb-4 text-lg">
-          Partes deste site oferecem uma oportunidade para os usuários postarem e trocarem opiniões e informações em certas áreas do site. {companyName} não filtra, edita, publica ou revisa Comentários antes de sua presença no site. Os Comentários não refletem as opiniões e pontos de vista de {companyName}, seus agentes e/ou afiliados. Os Comentários refletem as opiniões e pontos de vista da pessoa que posta suas opiniões e pontos de vista. Na medida do permitido pelas leis aplicáveis, {companyName} não será responsável pelos Comentários ou por qualquer responsabilidade, danos ou despesas causados e/ou sofridos como resultado de qualquer uso e/ou postagem e/ou aparecimento dos Comentários neste site.
+          Todo conteúdo da plataforma (exceto do usuário) pertence ao <strong>Vem Viver Lumiar</strong> e está protegido por direitos autorais.
         </p>
-        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Informações da Empresa</h2>
-        <p className="mb-2 text-lg">
-          <strong>Nome da Empresa:</strong> {companyName}
-        </p>
-        <p className="mb-2 text-lg">
-          <strong>Identificador:</strong> {companyCNPJ}
-        </p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Limitação de responsabilidade</h2>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li>Informações fornecidas por usuários e terceiros</li>
+          <li>Disponibilidade ininterrupta do serviço</li>
+          <li>Danos decorrentes do uso da plataforma</li>
+          <li>Atividades realizadas com base em nossas informações</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Suspensão e encerramento</h2>
         <p className="mb-4 text-lg">
-          Estes termos são efetivos a partir de 20 de agosto de 2024.
+          Podemos suspender ou encerrar contas que violem estes termos, com ou sem aviso prévio.
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Lei aplicável</h2>
+        <p className="mb-4 text-lg">
+          Estes termos são regidos pelas leis brasileiras, com foro na Comarca de Nova Friburgo, RJ.
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Contato</h2>
+        <p className="mb-4 text-lg">
+          Dúvidas sobre estes termos: contato@vemviverlumiar.com
         </p>
       </div>
     </Layout>

@@ -3,42 +3,96 @@ import Layout from '@/components/Layout';
 
 const PrivacyPolicy = () => {
   const companyName = "mm importados";
-  const companyCNPJ = "4430059901"; // Assuming this is a CNPJ or similar identifier
+  const companyCNPJ = "4430059901"; 
 
   return (
     <Layout>
-      <div className="container mx-auto p-6 bg-white rounded-lg shadow-md">
+      <div className="container mx-auto p-6 bg-white rounded-lg shadow-md prose max-w-none">
         <h1 className="text-4xl font-bold mb-6 text-primary">Política de Privacidade</h1>
+        <p className="mb-4 text-lg"><strong>Última atualização: 20 de agosto de 2024</strong></p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Quem somos</h2>
         <p className="mb-4 text-lg">
-          A sua privacidade é importante para nós. É política da {companyName} respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site <a href="/" className="text-blue-600 hover:underline">Vem Viver Lumiar</a>, e outros sites que possuímos e operamos.
+          O <strong>Vem Viver Lumiar</strong> é uma plataforma digital que conecta pessoas aos melhores locais e experiências em Lumiar, Nova Friburgo, RJ. Respeitamos sua privacidade e estamos comprometidos em proteger seus dados pessoais.
         </p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Dados que coletamos</h2>
+        <h3 className="text-xl font-semibold mt-4 mb-2">Dados fornecidos voluntariamente:</h3>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li>Nome e e-mail (cadastro)</li>
+          <li>Localização (quando autorizada)</li>
+          <li>Preferências e avaliações</li>
+          <li>Fotos e comentários compartilhados</li>
+          <li>Histórico de locais visitados</li>
+        </ul>
+        <h3 className="text-xl font-semibold mt-4 mb-2">Dados coletados automaticamente:</h3>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li>Informações do dispositivo e navegador</li>
+          <li>Endereço IP e dados de conexão</li>
+          <li>Cookies e tecnologias similares</li>
+          <li>Dados de uso da plataforma</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Como usamos seus dados</h2>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li><strong>Personalização</strong>: Sugerir locais baseados em suas preferências</li>
+          <li><strong>Notificações</strong>: Enviar alertas relevantes sobre eventos e locais</li>
+          <li><strong>Melhorias</strong>: Aprimorar nossa plataforma e funcionalidades</li>
+          <li><strong>Comunicação</strong>: Responder dúvidas e fornecer suporte</li>
+          <li><strong>Segurança</strong>: Proteger contra fraudes e uso inadequado</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Compartilhamento de dados</h2>
         <p className="mb-4 text-lg">
-          Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.
+          <strong>NÃO vendemos seus dados pessoais.</strong> Compartilhamos apenas quando:
         </p>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li>Você autoriza expressamente</li>
+          <li>Necessário para prestação do serviço</li>
+          <li>Exigido por lei ou autoridades</li>
+          <li>Com parceiros de confiança (sempre anonimizados)</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Seus direitos (LGPD)</h2>
+        <p className="mb-4 text-lg">Você pode:</p>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li><strong>Acessar</strong> seus dados pessoais</li>
+          <li><strong>Corrigir</strong> informações incorretas</li>
+          <li><strong>Excluir</strong> sua conta e dados</li>
+          <li><strong>Portar</strong> seus dados para outro serviço</li>
+          <li><strong>Revogar</strong> consentimentos dados</li>
+          <li><strong>Opor-se</strong> ao tratamento de dados</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Retenção de dados</h2>
+        <p className="mb-4 text-lg">Mantemos seus dados enquanto:</p>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li>Sua conta estiver ativa</li>
+          <li>Necessário para cumprimento legal</li>
+          <li>Você não solicitar exclusão</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Segurança</h2>
         <p className="mb-4 text-lg">
-          Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.
+          Utilizamos medidas técnicas e organizacionais para proteger seus dados:
         </p>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li>Criptografia de dados sensíveis</li>
+          <li>Acesso restrito e autenticado</li>
+          <li>Monitoramento contínuo</li>
+          <li>Backups seguros</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Contato para privacidade</h2>
+        <h3 className="text-xl font-semibold mt-4 mb-2">Encarregado de Dados (DPO)</h3>
+        <ul className="list-disc list-inside mb-4 pl-4 text-lg">
+          <li>E-mail: contato@vemviverlumiar.com</li>
+          <li>Telefone: (48) 99803-2197</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Alterações nesta política</h2>
         <p className="mb-4 text-lg">
-          Não compartilhamos informações de identificação pessoal publicamente ou com terceiros, exceto quando exigido por lei.
-        </p>
-        <p className="mb-4 text-lg">
-          O nosso site pode ter links para sites externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites e não podemos aceitar responsabilidade por suas respectivas políticas de privacidade.
-        </p>
-        <p className="mb-4 text-lg">
-          Você é livre para recusar a nossa solicitação de informações pessoais, entendendo que talvez não possamos fornecer alguns dos serviços desejados.
-        </p>
-        <p className="mb-4 text-lg">
-          O uso continuado de nosso site será considerado como aceitação de nossas práticas em torno de privacidade e informações pessoais. Se tiver alguma dúvida sobre como lidamos com dados do usuário e informações pessoais, entre em contato conosco.
-        </p>
-        <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Informações da Empresa</h2>
-        <p className="mb-2 text-lg">
-          <strong>Nome da Empresa:</strong> {companyName}
-        </p>
-        <p className="mb-2 text-lg">
-          <strong>Identificador:</strong> {companyCNPJ}
-        </p>
-        <p className="mb-4 text-lg">
-          Esta política é efetiva a partir de 20 de agosto de 2024.
+          Atualizaremos esta política conforme necessário. Mudanças significativas serão comunicadas por e-mail ou notificação na plataforma.
         </p>
       </div>
     </Layout>
