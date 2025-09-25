@@ -1,9 +1,8 @@
-import React from 'react';
 import Layout from '@/components/Layout';
 
 const AboutUs = () => {
-  const companyName = "mm importados";
-  const companyCNPJ = "30.444.611/0001-90"; // CNPJ from the Contact section in the markdown
+  const companyName = "Vem Viver Lumiar"; // Usando o nome da plataforma
+  const companyCNPJ = "30.444.611/0001-90"; // CNPJ do documento
   const responsible = "Matheus Macedo";
   const contactEmail = "contato@vemviverlumiar.com";
   const contactPhone = "(48) 99803-2197";
@@ -35,7 +34,7 @@ const AboutUs = () => {
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Nossa história</h2>
         <p className="mb-4 text-lg">
-          O <strong>Vem Viver Lumiar</strong> nasceu da paixão de <strong>{responsible}</strong> pela Serra Fluminense e do desejo de compartilhar as experiências autênticas que só quem conhece a região de verdade pode oferecer. Criamos esta plataforma para conectar pessoas aos locais especiais de Lumiar, promovendo um turismo consciente e sustentável.
+          O <strong>{companyName}</strong> (CNPJ: {companyCNPJ}) nasceu da paixão de <strong>{responsible}</strong> pela Serra Fluminense e do desejo de compartilhar as experiências autênticas que só quem conhece a região de verdade pode oferecer. Criamos esta plataforma para conectar pessoas aos locais especiais de Lumiar, promovendo um turismo consciente e sustentável.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Contato</h2>

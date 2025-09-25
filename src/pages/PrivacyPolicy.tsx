@@ -1,9 +1,8 @@
-import React from 'react';
 import Layout from '@/components/Layout';
 
 const PrivacyPolicy = () => {
-  const companyName = "mm importados";
-  const companyCNPJ = "4430059901"; 
+  const companyName = "Vem Viver Lumiar"; // Usando o nome da plataforma
+  const companyCNPJ = "30.444.611/0001-90"; // CNPJ do documento
 
   return (
     <Layout>
@@ -13,7 +12,7 @@ const PrivacyPolicy = () => {
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Quem somos</h2>
         <p className="mb-4 text-lg">
-          O <strong>Vem Viver Lumiar</strong> é uma plataforma digital que conecta pessoas aos melhores locais e experiências em Lumiar, Nova Friburgo, RJ. Respeitamos sua privacidade e estamos comprometidos em proteger seus dados pessoais.
+          O <strong>{companyName}</strong> (CNPJ: {companyCNPJ}) é uma plataforma digital que conecta pessoas aos melhores locais e experiências em Lumiar, Nova Friburgo, RJ. Respeitamos sua privacidade e estamos comprometidos em proteger seus dados pessoais.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Dados que coletamos</h2>

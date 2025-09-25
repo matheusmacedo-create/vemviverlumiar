@@ -1,4 +1,3 @@
-import React from 'react';
 import Layout from '@/components/Layout';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 

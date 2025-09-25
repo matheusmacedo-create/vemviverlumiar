@@ -1,9 +1,8 @@
-import React from 'react';
 import Layout from '@/components/Layout';
 
 const TermsOfService = () => {
-  const companyName = "mm importados";
-  const companyCNPJ = "4430059901"; 
+  const companyName = "Vem Viver Lumiar"; // Usando o nome da plataforma
+  const companyCNPJ = "30.444.611/0001-90"; // CNPJ do documento
 
   return (
     <Layout>
@@ -13,7 +12,7 @@ const TermsOfService = () => {
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Aceitação dos termos</h2>
         <p className="mb-4 text-lg">
-          Ao usar o <strong>Vem Viver Lumiar</strong>, você concorda com estes termos. Se não concordar, não use nossos serviços.
+          Ao usar o <strong>{companyName}</strong> (CNPJ: {companyCNPJ}), você concorda com estes termos. Se não concordar, não use nossos serviços.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Descrição do serviço</h2>
@@ -57,7 +56,7 @@ const TermsOfService = () => {
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Propriedade intelectual</h2>
         <p className="mb-4 text-lg">
-          Todo conteúdo da plataforma (exceto do usuário) pertence ao <strong>Vem Viver Lumiar</strong> e está protegido por direitos autorais.
+          Todo conteúdo da plataforma (exceto do usuário) pertence ao <strong>{companyName}</strong> e está protegido por direitos autorais.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Limitação de responsabilidade</h2>

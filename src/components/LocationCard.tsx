@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom'; // Importando Link
 
 interface LocationCardProps {
   image: string;
@@ -73,9 +74,11 @@ const LocationCard: React.FC<LocationCardProps> = ({
             </span>
           )}
         </div>
-        <Button variant="link" className="p-0 text-primary hover:text-primary/80">
-          Ver Detalhes <ArrowRight className="ml-1 h-4 w-4" />
-        </Button>
+        <Link to={href}> {/* Usando Link para navegação */}
+          <Button variant="link" className="p-0 text-primary hover:text-primary/80">
+            Ver Detalhes <ArrowRight className="ml-1 h-4 w-4" />
+          </Button>
+        </Link>
       </CardContent>
     </Card>
   );
