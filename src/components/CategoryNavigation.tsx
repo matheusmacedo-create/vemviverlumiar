@@ -7,12 +7,12 @@ interface CategoryNavigationProps {
 }
 
 const categories = [
-  { name: 'Natureza & Aventura', icon: '🌿', href: '/natureza-e-aventura-guia' }, // Link atualizado
-  { name: 'Sabores Locais', icon: '🍯', href: '/sabores-locais' },
-  { name: 'Hospedagem Única', icon: '🏡', href: '/hospedagem-unica' },
-  { name: 'Cultura & Arte', icon: '🎨', href: '/cultura-e-arte' },
-  { name: 'Bem-estar & Relaxamento', icon: '🧘‍♀️', href: '/bem-estar-e-relaxamento' },
-  { name: 'Compras Locais', icon: '🛍️', href: '/compras-locais' },
+  { name: 'Natureza & Aventura', icon: '🌿', href: '/categorias/natureza-e-aventura' }, // Link atualizado
+  { name: 'Sabores Locais', icon: '🍯', href: '/categorias/sabores-locais' },
+  { name: 'Hospedagem Única', icon: '🏡', href: '/categorias/hospedagem-unica' },
+  { name: 'Cultura & Arte', icon: '🎨', href: '/categorias/cultura-e-arte' },
+  { name: 'Bem-estar & Relaxamento', icon: '🧘‍♀️', href: '/categorias/bem-estar-e-relaxamento' },
+  { name: 'Compras Locais', icon: '🛍️', href: '/categorias/compras-locais' },
 ];
 
 const CategoryNavigation: React.FC<CategoryNavigationProps> = ({ className }) => {
