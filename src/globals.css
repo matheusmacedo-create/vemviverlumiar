@@ -55,8 +55,8 @@
     --article-lh: 1.65;
     --article-radius: 14px;
 
-    /* Altura do banner fixo no topo */
-    --fixed-ad-height: 90px; /* Altura padrão para o banner fixo */
+    /* REMOVIDO: Altura do banner fixo no topo */
+    /* --fixed-ad-height: 90px; */
   }
 
   .dark {

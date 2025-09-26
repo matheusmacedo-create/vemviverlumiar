@@ -220,7 +220,8 @@ const CategoryArticleList: React.FC = () => {
           icon={categoryData.hero.icon}
         />
 
-        {/* REMOVIDO: AdSense Ad after Hero Section on Category List Page, substituído pelo FixedTopAd global */}
+        {/* AdSense Ad after Hero Section on Category List Page */}
+        <AdSenseAd slot="YOUR_AD_SLOT_ID_6" format="auto" style={{ height: '250px', maxWidth: '728px', margin: '1rem auto' }} />
 
         <div className="container mx-auto py-8">
           <h2 className="text-3xl font-bold text-primary mb-8 text-center">Últimos Posts em {categoryData.hero.title}</h2>

@@ -166,7 +166,8 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
           </div>
           <p className="article-dek">{dek}</p>
         </div>
-        {/* REMOVIDO: AdSense Ad abaixo do cabeçalho do artigo, substituído pelo FixedTopAd global */}
+        {/* AdSense Ad abaixo do cabeçalho do artigo, como solicitado inicialmente */}
+        <AdSenseAd slot="YOUR_AD_SLOT_ID_8" format="auto" style={{ height: '150px', maxWidth: '728px', margin: '1rem auto' }} />
       </header>
 
       <div className="article-wrap">

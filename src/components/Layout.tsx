@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 import CategoryNavigation from './CategoryNavigation';
-import FixedTopAd from './FixedTopAd'; // Importando o novo componente FixedTopAd
+import AdSenseAd from './AdSenseAd'; // Certifique-se de que AdSenseAd está importado
 
 const Header = () => (
   <header className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white p-4 shadow-lg">
@@ -90,10 +90,12 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <FixedTopAd slot="YOUR_GLOBAL_TOP_AD_SLOT_ID" /> {/* Novo banner fixo no topo */}
+      {/* REMOVIDO: FixedTopAd */}
       <Header />
       <CategoryNavigation />
-      <main className="flex-grow container mx-auto p-4 md:p-6 pt-[calc(var(--fixed-ad-height)+1rem)]"> {/* Ajuste do padding-top */}
+      {/* NOVO: AdSense Ad global abaixo da navegação de categorias */}
+      <AdSenseAd slot="YOUR_GLOBAL_LEADERBOARD_AD_SLOT_ID" format="auto" style={{ height: '100px', maxWidth: '970px', margin: '1rem auto' }} />
+      <main className="flex-grow container mx-auto p-4 md:p-6"> {/* Padding-top revertido */}
         {children}
       </main>
       <Footer />
