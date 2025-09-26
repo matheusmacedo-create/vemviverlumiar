@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
-import ReviewSection from './ReviewSection'; // Importando o novo componente
+import ReviewSection from './ReviewSection';
+import ReviewForm from './ReviewForm';
+import { Review } from './ReviewItem'; // Importa a interface Review
+import { toast } from 'sonner'; // Importa toast para feedback de submissão
 
 interface ArticleLayoutProps {
   kicker: string;
@@ -9,13 +12,61 @@ interface ArticleLayoutProps {
   children: React.ReactNode;
 }
 
+// Dados fictícios para reviews iniciais (movidos de ReviewSection para ArticleLayout)
+const initialReviews: Review[] = [
+  {
+    id: '1',
+    reviewerName: 'Marina Santos',
+    reviewerLocation: 'São Paulo, SP',
+    visitDate: 'ago/2025',
+    rating: 5,
+    reviewTitle: 'Experiência incrível no Pico da Caledônia!',
+    reviewText: 'A trilha até o Pico da Caledônia foi desafiadora mas muito recompensadora! A vista lá de cima é indescritível. Recomendo muito contratar um guia local - fez toda diferença na segurança e conhecimento sobre a região. Voltarei com certeza!',
+    photos: [
+      { src: "https://via.placeholder.com/120x90?text=Vista+do+Pico", alt: "Vista do Pico da Caledônia" },
+      { src: "https://via.placeholder.com/120x90?text=Trilha", alt: "Trilha do Pico" },
+      { src: "https://via.placeholder.com/120x90?text=Grupo", alt: "Grupo na trilha" },
+    ],
+    likes: 12,
+    datePosted: 'há 2 semanas',
+  },
+  {
+    id: '2',
+    reviewerName: 'Carlos Oliveira',
+    reviewerLocation: 'Belo Horizonte, MG',
+    visitDate: 'jul/2025',
+    rating: 4,
+    reviewTitle: 'Cachoeiras maravilhosas para família',
+    reviewText: 'Levei minha família para conhecer as cachoeiras e foi uma experiência muito boa! As crianças adoraram o Poço Paraíso. Só sugiro levar mais repelente porque os mosquitos estavam bem ativos. No geral, recomendo!',
+    photos: [
+      { src: "https://via.placeholder.com/120x90?text=Poço+Paraíso", alt: "Poço Paraíso" },
+      { src: "https://via.placeholder.com/120x90?text=Família", alt: "Família na cachoeira" },
+    ],
+    likes: 8,
+    datePosted: 'há 1 mês',
+  },
+  {
+    id: '3',
+    reviewerName: 'Ana Costa',
+    reviewerLocation: 'Rio de Janeiro, RJ',
+    visitDate: 'jun/2025',
+    rating: 5,
+    reviewTitle: 'Natureza preservada e energia renovada',
+    reviewText: 'Como bióloga, fiquei impressionada com a diversidade da fauna e flora. Consegui avistar várias espécies de aves, incluindo o beija-flor-de-fronte-violeta! O trabalho de conservação da região está de parabéns. Um verdadeiro santuário ecológico.',
+    photos: [],
+    likes: 15,
+    datePosted: 'há 2 meses',
+  },
+];
+
 const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, children }) => {
   const progressRef = useRef<HTMLDivElement>(null);
   const articleRef = useRef<HTMLElement>(null);
   const tocRef = useRef<HTMLDivElement>(null);
   const [tocLinks, setTocLinks] = useState<{ id: string; text: string; level: 'h2' | 'h3'; href: string }[]>([]);
+  const [reviews, setReviews] = useState<Review[]>(initialReviews); // Gerencia o estado das reviews aqui
 
-  // Scroll progress
+  // Progresso de rolagem
   useEffect(() => {
     const onScroll = () => {
       if (progressRef.current) {
@@ -29,13 +80,13 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
     return () => document.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Generate TOC
+  // Gerar Sumário
   useEffect(() => {
     if (articleRef.current) {
       const headings = Array.from(articleRef.current.querySelectorAll('h2, h3')) as (HTMLHeadingElement)[];
       const newTocLinks = headings.map(h => {
         const id = h.parentElement?.id || h.id || h.textContent?.trim().toLowerCase().replace(/\s+/g, '-') || '';
-        if (!h.id) h.id = id; // Ensure headings have an ID for linking
+        if (!h.id) h.id = id; // Garante que os títulos tenham um ID para linkar
         return {
           id,
           text: h.textContent?.replace('#', '').trim() || '',
@@ -45,9 +96,9 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
       });
       setTocLinks(newTocLinks);
     }
-  }, [children]); // Re-generate if children change
+  }, [children]); // Regenera se os filhos mudarem
 
-  // Highlight active TOC link
+  // Destacar item ativo no Sumário
   useEffect(() => {
     const opts = { rootMargin: "0px 0px -70% 0px", threshold: 0 };
     const observer = new IntersectionObserver((entries) => {
@@ -69,7 +120,7 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
     }
 
     return () => observer.disconnect();
-  }, [tocLinks]); // Re-observe if TOC links change
+  }, [tocLinks]); // Re-observa se os links do Sumário mudarem
 
   const handleTocLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -78,6 +129,30 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  };
+
+  // Função para lidar com a submissão de uma nova review
+  const handleNewReviewSubmit = (formData: FormData) => {
+    toast.loading('Publicando sua review...');
+    setTimeout(() => {
+      const newReview: Review = {
+        id: (reviews.length + 1).toString(),
+        reviewerName: formData.get('reviewerName') as string,
+        reviewerLocation: formData.get('reviewerLocation') as string,
+        visitDate: formData.get('visitDate') as string,
+        rating: parseInt(formData.get('rating') as string),
+        reviewTitle: formData.get('reviewTitle') as string,
+        reviewText: formData.get('reviewText') as string,
+        photos: Array.from(formData.getAll('photos[]')).map(file => ({
+          src: URL.createObjectURL(file as File),
+          alt: (file as File).name,
+        })),
+        likes: 0,
+        datePosted: 'agora mesmo',
+      };
+      setReviews(prev => [newReview, ...prev]);
+      toast.success('Review publicada com sucesso!');
+    }, 1500);
   };
 
   return (
@@ -99,7 +174,7 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
           <article ref={articleRef} id="conteudo" className="article-content">
             {children}
             <hr className="article-hr" />
-            <ReviewSection /> {/* Adicionando a seção de reviews aqui */}
+            <ReviewSection reviews={reviews} /> {/* Passa as reviews para a seção */}
           </article>
 
           <aside aria-label="Sumário" className="article-aside">
@@ -124,6 +199,8 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
           </aside>
         </main>
       </div>
+      {/* Adicionando o ReviewForm flutuante aqui, fora do fluxo principal do artigo */}
+      <ReviewForm onSubmit={handleNewReviewSubmit} />
     </div>
   );
 };

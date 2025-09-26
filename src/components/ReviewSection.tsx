@@ -1,66 +1,21 @@
-import React, { useState } from 'react'; // 'useEffect' removido
-import ReviewForm from './ReviewForm';
+import React, { useState } from 'react';
 import ReviewItem, { Review } from './ReviewItem';
 import PhotoModal from './PhotoModal';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Star } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
-import { cn } from '@/lib/utils'; // Adicionado
 
 interface ReviewPhoto {
   src: string;
   alt: string;
 }
 
-// Dummy data for initial reviews
-const initialReviews: Review[] = [
-  {
-    id: '1',
-    reviewerName: 'Marina Santos',
-    reviewerLocation: 'São Paulo, SP',
-    visitDate: 'ago/2025',
-    rating: 5,
-    reviewTitle: 'Experiência incrível no Pico da Caledônia!',
-    reviewText: 'A trilha até o Pico da Caledônia foi desafiadora mas muito recompensadora! A vista lá de cima é indescritível. Recomendo muito contratar um guia local - fez toda diferença na segurança e conhecimento sobre a região. Voltarei com certeza!',
-    photos: [
-      { src: "https://via.placeholder.com/120x90?text=Vista+do+Pico", alt: "Vista do Pico da Caledônia" },
-      { src: "https://via.placeholder.com/120x90?text=Trilha", alt: "Trilha do Pico" },
-      { src: "https://via.placeholder.com/120x90?text=Grupo", alt: "Grupo na trilha" },
-    ],
-    likes: 12,
-    datePosted: 'há 2 semanas',
-  },
-  {
-    id: '2',
-    reviewerName: 'Carlos Oliveira',
-    reviewerLocation: 'Belo Horizonte, MG',
-    visitDate: 'jul/2025',
-    rating: 4,
-    reviewTitle: 'Cachoeiras maravilhosas para família',
-    reviewText: 'Levei minha família para conhecer as cachoeiras e foi uma experiência muito boa! As crianças adoraram o Poço Paraíso. Só sugiro levar mais repelente porque os mosquitos estavam bem ativos. No geral, recomendo!',
-    photos: [
-      { src: "https://via.placeholder.com/120x90?text=Poço+Paraíso", alt: "Poço Paraíso" },
-      { src: "https://via.placeholder.com/120x90?text=Família", alt: "Família na cachoeira" },
-    ],
-    likes: 8,
-    datePosted: 'há 1 mês',
-  },
-  {
-    id: '3',
-    reviewerName: 'Ana Costa',
-    reviewerLocation: 'Rio de Janeiro, RJ',
-    visitDate: 'jun/2025',
-    rating: 5,
-    reviewTitle: 'Natureza preservada e energia renovada',
-    reviewText: 'Como bióloga, fiquei impressionada com a diversidade da fauna e flora. Consegui avistar várias espécies de aves, incluindo o beija-flor-de-fronte-violeta! O trabalho de conservação da região está de parabéns. Um verdadeiro santuário ecológico.',
-    photos: [],
-    likes: 15,
-    datePosted: 'há 2 meses',
-  },
-];
+interface ReviewSectionProps {
+  reviews: Review[]; // Agora recebe reviews como prop
+}
 
-const ReviewSection: React.FC = () => {
-  const [reviews, setReviews] = useState<Review[]>(initialReviews);
+const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews }) => { // Desestrutura reviews
   const [filter, setFilter] = useState('recent');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalPhotos, setModalPhotos] = useState<ReviewPhoto[]>([]);
@@ -87,8 +42,11 @@ const ReviewSection: React.FC = () => {
 
   const sortedReviews = [...reviews].sort((a, b) => {
     if (filter === 'recent') {
-      // Simple string comparison for dummy data, in real app use Date objects
-      return b.datePosted.localeCompare(a.datePosted); 
+      // Para um aplicativo real, você analisaria datePosted em objetos Date para classificação precisa
+      // Por enquanto, assumindo 'agora mesmo' > 'há 2 semanas' > 'há 1 mês' etc.
+      const dateA = a.datePosted === 'agora mesmo' ? new Date() : new Date(Date.now() - (a.datePosted.includes('semanas') ? parseInt(a.datePosted) * 7 * 24 * 60 * 60 * 1000 : a.datePosted.includes('mês') ? parseInt(a.datePosted) * 30 * 24 * 60 * 60 * 1000 : 0));
+      const dateB = b.datePosted === 'agora mesmo' ? new Date() : new Date(Date.now() - (b.datePosted.includes('semanas') ? parseInt(b.datePosted) * 7 * 24 * 60 * 60 * 1000 : b.datePosted.includes('mês') ? parseInt(b.datePosted) * 30 * 24 * 60 * 60 * 1000 : 0));
+      return dateB.getTime() - dateA.getTime();
     }
     if (filter === 'rating') {
       return b.rating - a.rating;
@@ -99,51 +57,23 @@ const ReviewSection: React.FC = () => {
     return 0;
   });
 
-  const handleReviewSubmit = (formData: FormData) => {
-    // Simulate API call
-    toast.loading('Publicando sua review...');
-    setTimeout(() => {
-      const newReview: Review = {
-        id: (reviews.length + 1).toString(),
-        reviewerName: formData.get('reviewerName') as string,
-        reviewerLocation: formData.get('reviewerLocation') as string,
-        visitDate: formData.get('visitDate') as string,
-        rating: parseInt(formData.get('rating') as string),
-        reviewTitle: formData.get('reviewTitle') as string,
-        reviewText: formData.get('reviewText') as string,
-        photos: Array.from(formData.getAll('photos[]')).map(file => ({
-          src: URL.createObjectURL(file as File), // Create object URL for preview
-          alt: (file as File).name,
-        })),
-        likes: 0,
-        datePosted: 'agora mesmo',
-      };
-      setReviews(prev => [newReview, ...prev]);
-      toast.success('Review publicada com sucesso!');
-    }, 1500);
-  };
-
   const handlePhotoClick = (photos: ReviewPhoto[], initialIndex: number) => {
     setModalPhotos(photos);
     setModalInitialIndex(initialIndex);
     setIsModalOpen(true);
   };
 
-  const handleLike = (reviewId: string) => {
-    setReviews(prev =>
-      prev.map(review =>
-        review.id === reviewId ? { ...review, likes: review.likes + 1 } : review
-      )
-    );
+  const handleLike = (_reviewId: string) => { // reviewId renomeado para _reviewId
+    // Em um aplicativo real, isso acionaria uma chamada de API e atualizaria o estado pai
     toast.info('Você curtiu esta review!');
   };
 
-  const handleReport = (_reviewId: string) => { // reviewId renomeado para _reviewId
+  const handleReport = (_reviewId: string) => {
     toast.warning('Review reportada para moderação.');
-    // In a real app, send report to backend
+    // Em um aplicativo real, enviaria o relatório para o backend
   };
 
-  // Schema.org for AggregateRating
+  // Schema.org para AggregateRating
   const aggregateRatingSchema = {
     "@context": "https://schema.org",
     "@type": "AggregateRating",
@@ -151,7 +81,7 @@ const ReviewSection: React.FC = () => {
     "reviewCount": reviews.length.toString()
   };
 
-  // Schema.org for individual Reviews (first few)
+  // Schema.org para Reviews individuais (as primeiras)
   const reviewSchemas = sortedReviews.slice(0, 3).map(review => ({
     "@context": "https://schema.org",
     "@type": "Review",
@@ -164,7 +94,7 @@ const ReviewSection: React.FC = () => {
       "name": review.reviewerName
     },
     "reviewBody": review.reviewText,
-    "datePublished": new Date().toISOString().split('T')[0] // Placeholder, ideally use actual date
+    "datePublished": new Date().toISOString().split('T')[0] // Placeholder, idealmente use a data real
   }));
 
   return (
@@ -172,9 +102,9 @@ const ReviewSection: React.FC = () => {
       <h2 className="text-3xl font-bold text-primary mb-6">💬 Comentários & Reviews</h2>
       <p className="text-lg text-gray-700 mb-8">Compartilhe sua experiência em Nova Friburgo! Suas fotos e relatos ajudam outros viajantes a descobrir os melhores lugares.</p>
 
-      {/* Schema.org for AggregateRating */}
+      {/* Schema.org para AggregateRating */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }} />
-      {/* Schema.org for individual Reviews */}
+      {/* Schema.org para Reviews individuais */}
       {reviewSchemas.map((schema, index) => (
         <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       ))}
@@ -206,9 +136,6 @@ const ReviewSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Formulário para Nova Review */}
-      <ReviewForm onSubmit={handleReviewSubmit} />
-
       {/* Lista de Reviews Existentes */}
       <div className="reviews-container">
         <h3 className="text-xl font-semibold mb-4">📝 Reviews dos Visitantes</h3>
@@ -237,12 +164,6 @@ const ReviewSection: React.FC = () => {
             />
           ))}
         </div>
-
-        {/* <div className="load-more-container">
-          <Button variant="outline" onClick={() => toast.info('Funcionalidade de carregar mais em breve!')}>
-            Carregar mais reviews
-          </Button>
-        </div> */}
       </div>
 
       <PhotoModal
