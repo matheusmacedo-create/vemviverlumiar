@@ -18,7 +18,8 @@ export interface Review {
   reviewText: string;
   photos: ReviewPhoto[];
   likes: number;
-  datePosted: string; // e.g., "há 2 semanas"
+  datePosted: string; // e.g., "há 2 semanas" ou data formatada
+  source: 'Comunidade' | 'Google Reviews'; // Nova propriedade
 }
 
 interface ReviewItemProps {
@@ -43,6 +44,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review, onPhotoClick, onLike, o
 
   const getAvatarInitials = (name: string) => {
     const parts = name.split(' ');
+    if (parts.length === 0) return '';
     if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
     return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
   };
@@ -88,24 +90,27 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review, onPhotoClick, onLike, o
       
       <div className="review-footer">
         <span className="review-date text-sm text-muted-foreground">{review.datePosted}</span>
-        <div className="review-actions flex gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-            onClick={() => onLike(review.id)}
-          >
-            <ThumbsUp className="h-4 w-4 mr-1" /> {review.likes}
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-            onClick={() => onReport(review.id)}
-          >
-            <Flag className="h-4 w-4 mr-1" /> Reportar
-          </Button>
-        </div>
+        <span className="review-source text-sm text-muted-foreground ml-auto">Fonte: {review.source}</span> {/* Exibe a fonte */}
+        {review.source === 'Comunidade' && ( // Ações apenas para reviews da comunidade
+          <div className="review-actions flex gap-2 ml-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              onClick={() => onLike(review.id)}
+            >
+              <ThumbsUp className="h-4 w-4 mr-1" /> {review.likes}
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              onClick={() => onReport(review.id)}
+            >
+              <Flag className="h-4 w-4 mr-1" /> Reportar
+            </Button>
+          </div>
+        )}
       </div>
     </article>
   );

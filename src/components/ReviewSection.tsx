@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import ReviewItem, { Review } from './ReviewItem';
 import PhotoModal from './PhotoModal';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Star, MessageSquareText } from 'lucide-react'; // Importa MessageSquareText
+import { Star, MessageSquareText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
-import { Button } from '@/components/ui/button'; // Importa Button
+import { Button } from '@/components/ui/button';
+import { useQuery } from '@tanstack/react-query'; // Importa useQuery
+import { supabase } from '@/integrations/supabase/client'; // Importa o cliente Supabase
 
 interface ReviewPhoto {
   src: string;
@@ -14,24 +16,52 @@ interface ReviewPhoto {
 
 interface ReviewSectionProps {
   reviews: Review[];
-  onOpenReviewForm: () => void; // Nova prop para abrir o formulário
+  onOpenReviewForm: () => void;
+  placeId: string; // Nova prop para o Google Place ID
 }
 
-const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews, onOpenReviewForm }) => {
+const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews: initialCommunityReviews, onOpenReviewForm, placeId }) => {
   const [filter, setFilter] = useState('recent');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalPhotos, setModalPhotos] = useState<ReviewPhoto[]>([]);
   const [modalInitialIndex, setModalInitialIndex] = useState(0);
 
+  // Fetch Google Reviews using Supabase Edge Function
+  const { data: googleReviews = [], isLoading: isLoadingGoogleReviews, error: googleReviewsError } = useQuery<Review[]>({
+    queryKey: ['googleReviews', placeId],
+    queryFn: async () => {
+      if (!placeId) return [];
+      const { data, error } = await supabase.functions.invoke('get-google-reviews', {
+        body: { placeId },
+      });
+      if (error) {
+        console.error('Error fetching Google reviews:', error);
+        toast.error('Erro ao carregar avaliações do Google.');
+        return [];
+      }
+      return data as Review[];
+    },
+    enabled: !!placeId, // Only run query if placeId is provided
+  });
+
+  // Combine community reviews with Google reviews
+  const allReviews = React.useMemo(() => {
+    const communityReviewsWithSource = initialCommunityReviews.map(review => ({
+      ...review,
+      source: review.source || 'Comunidade', // Garante que reviews existentes tenham 'Comunidade' como fonte
+    }));
+    return [...communityReviewsWithSource, ...googleReviews];
+  }, [initialCommunityReviews, googleReviews]);
+
   const calculateAverageRating = () => {
-    if (reviews.length === 0) return 0;
-    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-    return totalRating / reviews.length;
+    if (allReviews.length === 0) return 0;
+    const totalRating = allReviews.reduce((sum, review) => sum + review.rating, 0);
+    return totalRating / allReviews.length;
   };
 
   const calculateRatingBreakdown = () => {
     const breakdown = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-    reviews.forEach(review => {
+    allReviews.forEach(review => {
       if (review.rating >= 1 && review.rating <= 5) {
         breakdown[review.rating as keyof typeof breakdown]++;
       }
@@ -42,10 +72,15 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews, onOpenReviewForm
   const averageRating = calculateAverageRating();
   const ratingBreakdown = calculateRatingBreakdown();
 
-  const sortedReviews = [...reviews].sort((a, b) => {
+  const sortedReviews = [...allReviews].sort((a, b) => {
     if (filter === 'recent') {
-      const dateA = a.datePosted === 'agora mesmo' ? new Date() : new Date(Date.now() - (a.datePosted.includes('semanas') ? parseInt(a.datePosted) * 7 * 24 * 60 * 60 * 1000 : a.datePosted.includes('mês') ? parseInt(a.datePosted) * 30 * 24 * 60 * 60 * 1000 : 0));
-      const dateB = b.datePosted === 'agora mesmo' ? new Date() : new Date(Date.now() - (b.datePosted.includes('semanas') ? parseInt(b.datePosted) * 7 * 24 * 60 * 60 * 1000 : b.datePosted.includes('mês') ? parseInt(b.datePosted) * 30 * 24 * 60 * 60 * 1000 : 0));
+      // Para reviews da comunidade, 'datePosted' pode ser 'há X tempo'.
+      // Para Google Reviews, 'datePosted' é uma data formatada.
+      // Precisamos de uma lógica mais robusta para ordenar por data real.
+      // Por simplicidade, vamos assumir que 'datePosted' é comparável ou que Google Reviews são mais recentes.
+      // Uma solução ideal seria ter um timestamp real em todas as reviews.
+      const dateA = new Date(a.datePosted.includes('há') ? Date.now() - (a.datePosted.includes('semanas') ? parseInt(a.datePosted.split(' ')[1]) * 7 * 24 * 60 * 60 * 1000 : a.datePosted.includes('mês') ? parseInt(a.datePosted.split(' ')[1]) * 30 * 24 * 60 * 60 * 1000 : 0) : a.datePosted);
+      const dateB = new Date(b.datePosted.includes('há') ? Date.now() - (b.datePosted.includes('semanas') ? parseInt(b.datePosted.split(' ')[1]) * 7 * 24 * 60 * 60 * 1000 : b.datePosted.includes('mês') ? parseInt(b.datePosted.split(' ')[1]) * 30 * 24 * 60 * 60 * 1000 : 0) : b.datePosted);
       return dateB.getTime() - dateA.getTime();
     }
     if (filter === 'rating') {
@@ -75,7 +110,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews, onOpenReviewForm
     "@context": "https://schema.org",
     "@type": "AggregateRating",
     "ratingValue": averageRating.toFixed(1),
-    "reviewCount": reviews.length.toString()
+    "reviewCount": allReviews.length.toString()
   };
 
   const reviewSchemas = sortedReviews.slice(0, 3).map(review => ({
@@ -110,7 +145,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews, onOpenReviewForm
             <div className="flex justify-center text-yellow-400 text-xl mb-1">
               {renderStars(Math.round(averageRating))}
             </div>
-            <div className="rating-text">Baseado em {reviews.length} avaliações</div>
+            <div className="rating-text">Baseado em {allReviews.length} avaliações</div>
           </div>
         </div>
         <div className="rating-breakdown">
@@ -120,7 +155,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews, onOpenReviewForm
               <div className="bar">
                 <div
                   className="fill"
-                  style={{ width: `${(ratingBreakdown[star as keyof typeof ratingBreakdown] / reviews.length) * 100 || 0}%` }}
+                  style={{ width: `${(ratingBreakdown[star as keyof typeof ratingBreakdown] / allReviews.length) * 100 || 0}%` }}
                 ></div>
               </div>
               <span className="rating-count">{ratingBreakdown[star as keyof typeof ratingBreakdown]}</span>
@@ -151,6 +186,9 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews, onOpenReviewForm
             </SelectContent>
           </Select>
         </div>
+
+        {isLoadingGoogleReviews && <p className="text-center text-gray-600">Carregando avaliações do Google...</p>}
+        {googleReviewsError && <p className="text-center text-red-500">Erro ao carregar avaliações do Google.</p>}
 
         <div className="reviews-list">
           {sortedReviews.map(review => (

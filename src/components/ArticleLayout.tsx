@@ -31,6 +31,7 @@ const initialReviews: Review[] = [
     ],
     likes: 12,
     datePosted: 'há 2 semanas',
+    source: 'Comunidade',
   },
   {
     id: '2',
@@ -46,6 +47,7 @@ const initialReviews: Review[] = [
     ],
     likes: 8,
     datePosted: 'há 1 mês',
+    source: 'Comunidade',
   },
   {
     id: '3',
@@ -58,6 +60,7 @@ const initialReviews: Review[] = [
     photos: [],
     likes: 15,
     datePosted: 'há 2 meses',
+    source: 'Comunidade',
   },
 ];
 
@@ -68,6 +71,11 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
   const [tocLinks, setTocLinks] = useState<{ id: string; text: string; level: 'h2' | 'h3'; href: string }[]>([]);
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
   const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
+
+  // Placeholder para o Google Place ID. Você precisará substituir este valor
+  // pelo ID real do local para o qual deseja buscar as avaliações.
+  // Exemplo de Place ID para "Nova Friburgo": ChIJN1t_Hc_smw0R_jC_7110000
+  const currentPlaceId = "ChIJN1t_Hc_smw0R_jC_7110000"; 
 
   useEffect(() => {
     const onScroll = () => {
@@ -148,6 +156,7 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
         })),
         likes: 0,
         datePosted: 'agora mesmo',
+        source: 'Comunidade', // Define a fonte como 'Comunidade'
       };
       setReviews(prev => [newReview, ...prev]);
       toast.success('Review publicada com sucesso!');
@@ -177,7 +186,7 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
             {/* AdSense Ad within article content */}
             <AdSenseAd slot="YOUR_AD_SLOT_ID_4" format="auto" style={{ height: '250px' }} />
             <hr className="article-hr" />
-            <ReviewSection reviews={reviews} onOpenReviewForm={() => setIsReviewFormOpen(true)} />
+            <ReviewSection reviews={reviews} onOpenReviewForm={() => setIsReviewFormOpen(true)} placeId={currentPlaceId} />
             <SuggestedPosts />
           </article>
 
