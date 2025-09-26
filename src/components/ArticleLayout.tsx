@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import ReviewSection from './ReviewSection';
 import ReviewForm from './ReviewForm';
-import { Review } from './ReviewItem'; // Importa a interface Review
-import { toast } from 'sonner'; // Importa toast para feedback de submissão
+import { Review } from './ReviewItem';
+import { toast } from 'sonner';
 
 interface ArticleLayoutProps {
   kicker: string;
@@ -12,7 +12,6 @@ interface ArticleLayoutProps {
   children: React.ReactNode;
 }
 
-// Dados fictícios para reviews iniciais (movidos de ReviewSection para ArticleLayout)
 const initialReviews: Review[] = [
   {
     id: '1',
@@ -64,9 +63,9 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
   const articleRef = useRef<HTMLElement>(null);
   const tocRef = useRef<HTMLDivElement>(null);
   const [tocLinks, setTocLinks] = useState<{ id: string; text: string; level: 'h2' | 'h3'; href: string }[]>([]);
-  const [reviews, setReviews] = useState<Review[]>(initialReviews); // Gerencia o estado das reviews aqui
+  const [reviews, setReviews] = useState<Review[]>(initialReviews);
+  const [isReviewFormOpen, setIsReviewFormOpen] = useState(false); // Estado para controlar o modal do formulário
 
-  // Progresso de rolagem
   useEffect(() => {
     const onScroll = () => {
       if (progressRef.current) {
@@ -80,13 +79,12 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
     return () => document.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Gerar Sumário
   useEffect(() => {
     if (articleRef.current) {
       const headings = Array.from(articleRef.current.querySelectorAll('h2, h3')) as (HTMLHeadingElement)[];
       const newTocLinks = headings.map(h => {
         const id = h.parentElement?.id || h.id || h.textContent?.trim().toLowerCase().replace(/\s+/g, '-') || '';
-        if (!h.id) h.id = id; // Garante que os títulos tenham um ID para linkar
+        if (!h.id) h.id = id;
         return {
           id,
           text: h.textContent?.replace('#', '').trim() || '',
@@ -96,9 +94,8 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
       });
       setTocLinks(newTocLinks);
     }
-  }, [children]); // Regenera se os filhos mudarem
+  }, [children]);
 
-  // Destacar item ativo no Sumário
   useEffect(() => {
     const opts = { rootMargin: "0px 0px -70% 0px", threshold: 0 };
     const observer = new IntersectionObserver((entries) => {
@@ -120,7 +117,7 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
     }
 
     return () => observer.disconnect();
-  }, [tocLinks]); // Re-observa se os links do Sumário mudarem
+  }, [tocLinks]);
 
   const handleTocLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -131,7 +128,6 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
     }
   };
 
-  // Função para lidar com a submissão de uma nova review
   const handleNewReviewSubmit = (formData: FormData) => {
     toast.loading('Publicando sua review...');
     setTimeout(() => {
@@ -174,7 +170,7 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
           <article ref={articleRef} id="conteudo" className="article-content">
             {children}
             <hr className="article-hr" />
-            <ReviewSection reviews={reviews} /> {/* Passa as reviews para a seção */}
+            <ReviewSection reviews={reviews} onOpenReviewForm={() => setIsReviewFormOpen(true)} /> {/* Passa a função para abrir o formulário */}
           </article>
 
           <aside aria-label="Sumário" className="article-aside">
@@ -199,8 +195,13 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
           </aside>
         </main>
       </div>
-      {/* Adicionando o ReviewForm flutuante aqui, fora do fluxo principal do artigo */}
-      <ReviewForm onSubmit={handleNewReviewSubmit} />
+      
+      {/* Renderiza o ReviewForm como um modal */}
+      <ReviewForm
+        isOpen={isReviewFormOpen}
+        onClose={() => setIsReviewFormOpen(false)}
+        onSubmit={handleNewReviewSubmit}
+      />
     </div>
   );
 };
