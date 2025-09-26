@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { cn } from '@/lib/utils';
 
 interface AdSenseAdProps {
@@ -9,30 +9,34 @@ interface AdSenseAdProps {
 }
 
 const AdSenseAd: React.FC<AdSenseAdProps> = ({ slot, format = 'auto', className, style }) => {
-  useEffect(() => {
-    try {
-      // Verifica se window.adsbygoogle existe antes de tentar empurrar
-      if (window.adsbygoogle && process.env.NODE_ENV === 'production') { // Apenas em produção
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      } else if (process.env.NODE_ENV !== 'production') {
-        console.log(`AdSense Ad Placeholder: slot=${slot}, format=${format}`);
-      }
-    } catch (e) {
-      console.error("AdSense error:", e);
-    }
-  }, [slot, format]);
+  // Em ambiente de desenvolvimento, exibimos um banner temporário.
+  // Em produção, o script do AdSense seria ativado.
+  // Para ativar o AdSense em produção, você precisaria reverter este arquivo
+  // para a versão anterior e garantir que o script do AdSense esteja no index.html.
 
-  // Use um ID de editor de exemplo para desenvolvimento, mas instrua o usuário a substituí-lo
-  const adClient = "ca-pub-YOUR_ADSENSE_PUBLISHER_ID"; 
+  const defaultStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#e0e0e0', // Cor de fundo cinza claro para o banner
+    color: '#333',
+    border: '1px dashed #999',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    minHeight: '100px', // Altura mínima para visibilidade
+    width: '100%',
+    height: '280px', // Altura padrão, pode ser sobrescrita
+    ...style, // Permite que estilos passados sobrescrevam os padrões
+  };
 
   return (
-    <div className={cn("my-8 text-center", className)} style={style}>
-      <ins className="adsbygoogle"
-           style={{ display: 'block', width: '100%', height: '280px' }} // Estilo padrão, pode ser sobrescrito
-           data-ad-client={adClient}
-           data-ad-slot={slot}
-           data-ad-format={format}
-           data-full-width-responsive="true"></ins>
+    <div className={cn("my-8", className)} style={defaultStyle}>
+      <div className="p-4">
+        <p>Banner de Anúncio</p>
+        <p className="text-sm font-normal text-gray-600">Slot: {slot}</p>
+        <p className="text-xs font-normal text-gray-500">Formato: {format}</p>
+      </div>
     </div>
   );
 };
