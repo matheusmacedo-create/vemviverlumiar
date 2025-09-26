@@ -4,6 +4,7 @@ import Layout from '@/components/Layout';
 import HeroCategory from '@/components/HeroCategory';
 import LocationCard from '@/components/LocationCard';
 import { ArrowLeft } from 'lucide-react';
+import AdSenseAd from '@/components/AdSenseAd'; // Importando o componente de anúncio
 
 // Define uma interface para os objetos de post, espelhando LocationCardProps
 interface ArticlePost {
@@ -219,22 +220,32 @@ const CategoryArticleList: React.FC = () => {
           icon={categoryData.hero.icon}
         />
 
+        {/* AdSense Ad after Hero Section on Category List Page */}
+        <AdSenseAd slot="YOUR_AD_SLOT_ID_6" format="auto" style={{ height: '250px' }} />
+
         <div className="container mx-auto py-8">
           <h2 className="text-3xl font-bold text-primary mb-8 text-center">Últimos Posts em {categoryData.hero.title}</h2>
           
           {categoryData.posts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {categoryData.posts.map((post, index) => (
-                <LocationCard
-                  key={index}
-                  image={post.image}
-                  title={post.title}
-                  description={post.description}
-                  category={post.category}
-                  rating={post.rating}
-                  badges={post.badges}
-                  href={post.href}
-                />
+                <React.Fragment key={index}>
+                  <LocationCard
+                    image={post.image}
+                    title={post.title}
+                    description={post.description}
+                    category={post.category}
+                    rating={post.rating}
+                    badges={post.badges}
+                    href={post.href}
+                  />
+                  {/* AdSense Ad within the grid, e.g., after every 3rd post */}
+                  {index === 2 && categoryData.posts.length > 3 && (
+                    <div className="col-span-1 md:col-span-2 lg:col-span-3">
+                      <AdSenseAd slot="YOUR_AD_SLOT_ID_7" format="rectangle" style={{ height: '300px', maxWidth: '728px', margin: 'auto' }} />
+                    </div>
+                  )}
+                </React.Fragment>
               ))}
             </div>
           ) : (
