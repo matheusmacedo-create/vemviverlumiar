@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
+import ReviewSection from './ReviewSection'; // Importando o novo componente
 
 interface ArticleLayoutProps {
   kicker: string;
@@ -97,6 +98,8 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
         <main className="article-main">
           <article ref={articleRef} id="conteudo" className="article-content">
             {children}
+            <hr className="article-hr" />
+            <ReviewSection /> {/* Adicionando a seção de reviews aqui */}
           </article>
 
           <aside aria-label="Sumário" className="article-aside">
