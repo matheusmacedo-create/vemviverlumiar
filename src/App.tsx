@@ -21,7 +21,12 @@ import CultureAndArt from "./pages/CultureAndArt";
 import WellnessAndRelaxation from "./pages/WellnessAndRelaxation";
 import LocalShopping from "./pages/LocalShopping";
 import NatureAndAdventureContent from "./pages/NatureAndAdventureContent";
-import CategoryArticleList from "./pages/CategoryArticleList"; // Nova importação
+import CategoryArticleList from "./pages/CategoryArticleList";
+import EncontroDosRios from "./pages/EncontroDosRios"; // Nova importação
+import CachoeiraIndianaJones from "./pages/CachoeiraIndianaJones"; // Nova importação
+import CachoeiraTocaDaOnca from "./pages/CachoeiraTocaDaOnca"; // Nova importação
+import TrilhaPedraRiscada from "./pages/TrilhaPedraRiscada"; // Nova importação
+import PocosDeLumiar from "./pages/PocosDeLumiar"; // Nova importação
 
 const queryClient = new QueryClient();
 
@@ -51,8 +56,13 @@ const App = () => (
           <Route path="/cultura-e-arte" element={<CultureAndArt />} />
           <Route path="/bem-estar-e-relaxamento" element={<WellnessAndRelaxation />} />
           <Route path="/compras-locais" element={<LocalShopping />} />
-          {/* Rota de conteúdo detalhado */}
+          {/* Rotas de conteúdo detalhado */}
           <Route path="/natureza-e-aventura-guia" element={<NatureAndAdventureContent />} />
+          <Route path="/encontro-dos-rios-lumiar-rio-macae-bonito" element={<EncontroDosRios />} />
+          <Route path="/cachoeira-indiana-jones-lumiar-aventura-mata-atlantica" element={<CachoeiraIndianaJones />} />
+          <Route path="/cachoeira-toca-da-onca-lumiar-paraiso-aquatico" element={<CachoeiraTocaDaOnca />} />
+          <Route path="/trilha-pedra-riscada-lumiar-vista-panoramica" element={<TrilhaPedraRiscada />} />
+          <Route path="/pocos-lumiar-banhos-naturais-guia-completo" element={<PocosDeLumiar />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -47,20 +47,45 @@ const dummyArticles: {
       },
       {
         image: '/placeholder.svg',
-        title: 'As 5 Melhores Trilhas para Iniciantes em Lumiar',
-        description: 'Descubra caminhos leves e vistas deslumbrantes, perfeitos para toda a família.',
+        title: 'Encontro dos Rios em Lumiar: Um Espetáculo Natural Inesquecível',
+        description: 'Onde o Rio Macaé e Rio Bonito se encontram. Dicas de rafting, trilhas e estrutura.',
         category: 'Natureza & Aventura',
-        rating: 4.7,
-        badges: [{ type: 'novo', text: 'Novo' }],
-        href: '#', // Placeholder for other articles
+        rating: 4.8,
+        badges: [{ type: 'popular', text: 'Popular' }],
+        href: '/encontro-dos-rios-lumiar-rio-macae-bonito',
       },
       {
         image: '/placeholder.svg',
-        title: 'Observação de Aves na Mata Atlântica de Lumiar',
-        description: 'Um paraíso para os amantes da ornitologia, com espécies raras e endêmicas.',
+        title: 'Cachoeira Indiana Jones Lumiar: Aventura e Adrenalina',
+        description: 'Trilha emocionante por cânions naturais, rapel e banhos em poços cristalinos.',
+        category: 'Natureza & Aventura',
+        rating: 4.7,
+        badges: [{ type: 'novo', text: 'Novo' }],
+        href: '/cachoeira-indiana-jones-lumiar-aventura-mata-atlantica',
+      },
+      {
+        image: '/placeholder.svg',
+        title: 'Cachoeira Toca da Onça: O Paraíso Aquático Completo',
+        description: 'Piscinas naturais, camping, canoagem e estrutura completa para toda a família.',
+        category: 'Natureza & Aventura',
+        rating: 4.9,
+        href: '/cachoeira-toca-da-onca-lumiar-paraiso-aquatico',
+      },
+      {
+        image: '/placeholder.svg',
+        title: 'Trilha da Pedra Riscada: A Caminhada Mais Espetacular',
+        description: '3km de caminhada com vista panorâmica de 360° da Serra dos Órgãos.',
         category: 'Natureza & Aventura',
         rating: 4.6,
-        href: '#',
+        href: '/trilha-pedra-riscada-lumiar-vista-panoramica',
+      },
+      {
+        image: '/placeholder.svg',
+        title: 'Poços de Lumiar: Guia Completo dos Melhores Banhos Naturais',
+        description: 'Descubra Poço Feio, Poço Verde e Poço Belo. Banhos naturais mais lindos de Nova Friburgo.',
+        category: 'Natureza & Aventura',
+        rating: 4.5,
+        href: '/pocos-lumiar-banhos-naturais-guia-completo',
       },
     ],
   },
@@ -168,7 +193,7 @@ const dummyArticles: {
 
 const CategoryArticleList: React.FC = () => {
   const { categorySlug } = useParams<{ categorySlug: string }>();
-  const categoryData = categorySlug ? dummyArticles[categorySlug] : undefined;
+  const categoryData = categorySlug ? dummyArticles[categorySlug as keyof typeof dummyArticles] : undefined;
 
   if (!categoryData) {
     return (
