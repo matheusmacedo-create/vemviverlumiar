@@ -30,9 +30,6 @@ const Index = () => {
           </div>
         </section>
 
-        {/* AdSense Ad after Hero Section */}
-        <AdSenseAd slot="YOUR_AD_SLOT_ID_1" format="auto" style={{ height: '250px' }} />
-
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
           {/* Content Area */}
