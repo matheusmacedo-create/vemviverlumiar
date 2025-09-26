@@ -7,12 +7,12 @@ import WeatherWidget from "@/components/widgets/WeatherWidget";
 import MostVisitedWidget from "@/components/widgets/MostVisitedWidget";
 import NearYouWidget from "@/components/widgets/NearYouWidget";
 import EventsTodayWidget from "@/components/widgets/EventsTodayWidget";
-import AdSenseAd from "@/components/AdSenseAd"; // Importando o componente de anúncio
+import AdSenseAd from "@/components/AdSenseAd";
 
 const Index = () => {
   return (
     <Layout>
-      <div className="space-y-12">
+      <div className="space-y-12 p-4 md:p-6"> {/* Adicionado p-4 md:p-6 aqui */}
         {/* Hero Section */}
         <section className="relative h-[60vh] bg-cover bg-center flex items-center justify-center text-white rounded-lg shadow-lg" style={{ backgroundImage: "url('/placeholder.svg')" }}>
           <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>

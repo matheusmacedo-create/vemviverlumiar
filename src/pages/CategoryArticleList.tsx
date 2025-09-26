@@ -4,7 +4,7 @@ import Layout from '@/components/Layout';
 import HeroCategory from '@/components/HeroCategory';
 import LocationCard from '@/components/LocationCard';
 import { ArrowLeft } from 'lucide-react';
-import AdSenseAd from '@/components/AdSenseAd'; // Importando o componente de anúncio
+import AdSenseAd from '@/components/AdSenseAd';
 
 // Define uma interface para os objetos de post, espelhando LocationCardProps
 interface ArticlePost {
@@ -212,7 +212,7 @@ const CategoryArticleList: React.FC = () => {
 
   return (
     <Layout>
-      <div className="space-y-12">
+      <div className="space-y-12 p-4 md:p-6"> {/* Adicionado p-4 md:p-6 aqui */}
         <HeroCategory
           title={categoryData.hero.title}
           subtitle={categoryData.hero.subtitle}
