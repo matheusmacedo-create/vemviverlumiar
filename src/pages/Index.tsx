@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import LocationCard from "@/components/LocationCard";
 import Sidebar from "@/components/Sidebar";
 import WeatherWidget from "@/components/widgets/WeatherWidget";
@@ -30,7 +29,7 @@ const Index = () => {
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-white text-lg px-8 py-6 rounded-full shadow-lg">
                     <Link to="/categorias/natureza-e-aventura">
-                      <span className="flex items-center">Descobrir agora <ArrowRight className="ml-2 h-5 w-5" /></span>
+                      <span>Descobrir agora</span>
                     </Link>
                   </Button>
                   <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary text-lg px-8 py-6 rounded-full shadow-lg">
