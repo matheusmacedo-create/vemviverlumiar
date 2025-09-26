@@ -34,7 +34,7 @@ const Index = () => {
                     </Link>
                   </Button>
                   <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary text-lg px-8 py-6 rounded-full shadow-lg">
-                    <Link to="#">Baixar App</Link> {/* Link para download do app */}
+                    <Link to="#"><span>Baixar App</span></Link> {/* Link para download do app */}
                   </Button>
                 </div>
               </div>
@@ -189,10 +189,10 @@ const Index = () => {
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
                   <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 rounded-full shadow-lg">
-                    <Link to="#">Baixar App Agora</Link> {/* Link para download do app */}
+                    <Link to="#"><span>Baixar App Agora</span></Link> {/* Link para download do app */}
                   </Button>
                   <Button asChild size="lg" variant="outline" className="text-primary border-primary hover:bg-primary/10 text-lg px-8 py-6 rounded-full shadow-lg">
-                    <Link to="/categorias/natureza-e-aventura">Explorar Locais</Link>
+                    <Link to="/categorias/natureza-e-aventura"><span>Explorar Locais</span></Link>
                   </Button>
                 </div>
               </div>
