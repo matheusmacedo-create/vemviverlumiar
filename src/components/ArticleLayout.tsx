@@ -4,6 +4,8 @@ import ReviewSection from './ReviewSection';
 import ReviewForm from './ReviewForm';
 import { Review } from './ReviewItem';
 import { toast } from 'sonner';
+import SuggestedPosts from './SuggestedPosts'; // Importa o novo componente
+import Footer from './Footer'; // Importa o novo componente
 
 interface ArticleLayoutProps {
   kicker: string;
@@ -64,7 +66,7 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
   const tocRef = useRef<HTMLDivElement>(null);
   const [tocLinks, setTocLinks] = useState<{ id: string; text: string; level: 'h2' | 'h3'; href: string }[]>([]);
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
-  const [isReviewFormOpen, setIsReviewFormOpen] = useState(false); // Estado para controlar o modal do formulário
+  const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -170,7 +172,8 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
           <article ref={articleRef} id="conteudo" className="article-content">
             {children}
             <hr className="article-hr" />
-            <ReviewSection reviews={reviews} onOpenReviewForm={() => setIsReviewFormOpen(true)} /> {/* Passa a função para abrir o formulário */}
+            <ReviewSection reviews={reviews} onOpenReviewForm={() => setIsReviewFormOpen(true)} />
+            <SuggestedPosts /> {/* Adicionando a seção de posts sugeridos aqui */}
           </article>
 
           <aside aria-label="Sumário" className="article-aside">
@@ -196,12 +199,12 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
         </main>
       </div>
       
-      {/* Renderiza o ReviewForm como um modal */}
       <ReviewForm
         isOpen={isReviewFormOpen}
         onClose={() => setIsReviewFormOpen(false)}
         onSubmit={handleNewReviewSubmit}
       />
+      <Footer /> {/* Adicionando o rodapé aqui, fora do article-wrap mas dentro do article-body */}
     </div>
   );
 };
