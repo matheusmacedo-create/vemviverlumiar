@@ -7,7 +7,7 @@ interface CategoryNavigationProps {
 }
 
 const categories = [
-  { name: 'Natureza & Aventura', icon: '🌿', href: '/natureza-e-aventura' },
+  { name: 'Natureza & Aventura', icon: '🌿', href: '/natureza-e-aventura-guia' }, // Link atualizado
   { name: 'Sabores Locais', icon: '🍯', href: '/sabores-locais' },
   { name: 'Hospedagem Única', icon: '🏡', href: '/hospedagem-unica' },
   { name: 'Cultura & Arte', icon: '🎨', href: '/cultura-e-arte' },
