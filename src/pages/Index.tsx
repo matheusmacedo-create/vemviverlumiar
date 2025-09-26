@@ -1,12 +1,13 @@
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import LocationCard from "@/components/LocationCard"; // Importando o novo componente
-import Sidebar from "@/components/Sidebar"; // Importando o novo componente
-import WeatherWidget from "@/components/widgets/WeatherWidget"; // Importando o widget de clima
-import MostVisitedWidget from "@/components/widgets/MostVisitedWidget"; // Importando o widget de mais visitados
-import NearYouWidget from "@/components/widgets/NearYouWidget"; // Importando o widget de perto de você
-import EventsTodayWidget from "@/components/widgets/EventsTodayWidget"; // Importando o widget de eventos
+import LocationCard from "@/components/LocationCard";
+import Sidebar from "@/components/Sidebar";
+import WeatherWidget from "@/components/widgets/WeatherWidget";
+import MostVisitedWidget from "@/components/widgets/MostVisitedWidget";
+import NearYouWidget from "@/components/widgets/NearYouWidget";
+import EventsTodayWidget from "@/components/widgets/EventsTodayWidget";
+import AdSenseAd from "@/components/AdSenseAd"; // Importando o componente de anúncio
 
 const Index = () => {
   return (
@@ -20,7 +21,7 @@ const Index = () => {
             <p className="text-xl mb-8 max-w-2xl mx-auto">Descubra cachoeiras secretas, prove sabores únicos e conecte-se com a essência da Serra Fluminense. Mais que um destino, uma experiência autêntica.</p>
             <div className="flex justify-center space-x-4">
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-white text-lg px-8 py-6 rounded-full shadow-lg">
-                Descobrir agora <ArrowRight className="ml-2 h-5 w-5" /> {/* CTA atualizado */}
+                Descobrir agora <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary text-lg px-8 py-6 rounded-full shadow-lg">
                 Baixar App
@@ -28,6 +29,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* AdSense Ad after Hero Section */}
+        <AdSenseAd slot="YOUR_AD_SLOT_ID_1" format="auto" style={{ height: '250px' }} />
 
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
@@ -69,6 +73,9 @@ const Index = () => {
               </div>
             </section>
 
+            {/* AdSense Ad within content */}
+            <AdSenseAd slot="YOUR_AD_SLOT_ID_2" format="rectangle" style={{ height: '300px', maxWidth: '728px', margin: 'auto' }} />
+
             {/* Seções de Conteúdo - Locais Imperdíveis */}
             <section className="py-8 bg-muted rounded-lg p-6">
               <h2 className="text-4xl font-bold text-center mb-8">Locais Imperdíveis</h2>
@@ -103,6 +110,8 @@ const Index = () => {
             <MostVisitedWidget />
             <NearYouWidget />
             <EventsTodayWidget />
+            {/* AdSense Ad in Sidebar */}
+            <AdSenseAd slot="YOUR_AD_SLOT_ID_3" format="vertical" style={{ height: '600px', maxWidth: '300px', margin: 'auto' }} />
           </Sidebar>
         </div>
       </div>

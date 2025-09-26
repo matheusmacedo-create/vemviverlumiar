@@ -4,8 +4,9 @@ import ReviewSection from './ReviewSection';
 import ReviewForm from './ReviewForm';
 import { Review } from './ReviewItem';
 import { toast } from 'sonner';
-import SuggestedPosts from './SuggestedPosts'; // Importa o novo componente
-import Footer from './Footer'; // Importa o novo componente
+import SuggestedPosts from './SuggestedPosts';
+import Footer from './Footer';
+import AdSenseAd from './AdSenseAd'; // Importa o componente de anúncio
 
 interface ArticleLayoutProps {
   kicker: string;
@@ -171,9 +172,11 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
         <main className="article-main">
           <article ref={articleRef} id="conteudo" className="article-content">
             {children}
+            {/* AdSense Ad within article content */}
+            <AdSenseAd slot="YOUR_AD_SLOT_ID_4" format="auto" style={{ height: '250px' }} />
             <hr className="article-hr" />
             <ReviewSection reviews={reviews} onOpenReviewForm={() => setIsReviewFormOpen(true)} />
-            <SuggestedPosts /> {/* Adicionando a seção de posts sugeridos aqui */}
+            <SuggestedPosts />
           </article>
 
           <aside aria-label="Sumário" className="article-aside">
@@ -195,6 +198,8 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
                 ))}
               </div>
             </nav>
+            {/* AdSense Ad in Sidebar of Article */}
+            <AdSenseAd slot="YOUR_AD_SLOT_ID_5" format="vertical" style={{ height: '600px', maxWidth: '300px', margin: 'auto', marginTop: '2rem' }} />
           </aside>
         </main>
       </div>
@@ -204,7 +209,7 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({ kicker, title, dek, child
         onClose={() => setIsReviewFormOpen(false)}
         onSubmit={handleNewReviewSubmit}
       />
-      <Footer /> {/* Adicionando o rodapé aqui, fora do article-wrap mas dentro do article-body */}
+      <Footer />
     </div>
   );
 };

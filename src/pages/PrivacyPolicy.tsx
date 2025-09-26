@@ -30,6 +30,7 @@ const PrivacyPolicy = () => {
           <li>Endereço IP e dados de conexão</li>
           <li>Cookies e tecnologias similares</li>
           <li>Dados de uso da plataforma</li>
+          <li>**Google AdSense**: Coletamos dados através do Google AdSense para exibir anúncios personalizados. O Google utiliza cookies para veicular anúncios com base nas visitas anteriores do usuário ao nosso website ou a outros websites.</li>
         </ul>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Como usamos seus dados</h2>
@@ -39,6 +40,7 @@ const PrivacyPolicy = () => {
           <li><strong>Melhorias</strong>: Aprimorar nossa plataforma e funcionalidades</li>
           <li><strong>Comunicação</strong>: Responder dúvidas e fornecer suporte</li>
           <li><strong>Segurança</strong>: Proteger contra fraudes e uso inadequado</li>
+          <li>**Publicidade**: Usamos os dados coletados pelo Google AdSense para exibir anúncios relevantes aos nossos usuários.</li>
         </ul>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Compartilhamento de dados</h2>
@@ -50,6 +52,7 @@ const PrivacyPolicy = () => {
           <li>Necessário para prestação do serviço</li>
           <li>Exigido por lei ou autoridades</li>
           <li>Com parceiros de confiança (sempre anonimizados)</li>
+          <li>**Google AdSense**: O Google, como fornecedor terceirizado, utiliza cookies para veicular anúncios em nosso site. O uso de cookies DART pelo Google permite a veiculação de anúncios para nossos usuários com base em suas visitas ao nosso site e a outros sites na Internet. Os usuários podem desativar o uso do cookie DART visitando a política de privacidade da rede de conteúdo e dos anúncios do Google.</li>
         </ul>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Seus direitos (LGPD)</h2>
@@ -61,6 +64,7 @@ const PrivacyPolicy = () => {
           <li><strong>Portar</strong> seus dados para outro serviço</li>
           <li><strong>Revogar</strong> consentimentos dados</li>
           <li><strong>Opor-se</strong> ao tratamento de dados</li>
+          <li>**Gerenciar preferências de anúncios**: Você pode visitar as Configurações de anúncios para gerenciar os anúncios do Google que você vê e desativar a personalização de anúncios.</li>
         </ul>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4 text-primary">Retenção de dados</h2>
