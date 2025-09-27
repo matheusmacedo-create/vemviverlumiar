@@ -39,6 +39,15 @@ const dummyArticles: {
     posts: [
       {
         image: '/placeholder.svg',
+        title: 'Lumiar, Nova Friburgo: O Guia Definitivo das 7 Cachoeiras Mais Espetaculares',
+        description: 'Descubra os segredos mais bem guardados da Serra Fluminense com quem realmente conhece cada trilha, cada poço e cada cantinho mágico de Lumiar.',
+        category: 'Natureza & Aventura',
+        rating: 5.0,
+        badges: [{ type: 'imperdivel', text: 'Guia Completo' }],
+        href: '/lumiar-cachoeiras-guia',
+      },
+      {
+        image: '/placeholder.svg',
         title: 'Guia Completo: Natureza & Aventura em Nova Friburgo',
         description: 'Explore cachoeiras, trilhas e mirantes da Serra dos Órgãos com nosso guia detalhado.',
         category: 'Natureza & Aventura',

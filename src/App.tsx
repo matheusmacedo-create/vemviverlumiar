@@ -27,6 +27,7 @@ import CachoeiraIndianaJones from "./pages/CachoeiraIndianaJones"; // Nova impor
 import CachoeiraTocaDaOnca from "./pages/CachoeiraTocaDaOnca"; // Nova importação
 import TrilhaPedraRiscada from "./pages/TrilhaPedraRiscada"; // Nova importação
 import PocosDeLumiar from "./pages/PocosDeLumiar"; // Nova importação
+import LumiarWaterfallsGuide from "./pages/LumiarWaterfallsGuide"; // Nova importação
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,7 @@ const App = () => (
           <Route path="/cachoeira-toca-da-onca-lumiar-paraiso-aquatico" element={<CachoeiraTocaDaOnca />} />
           <Route path="/trilha-pedra-riscada-lumiar-vista-panoramica" element={<TrilhaPedraRiscada />} />
           <Route path="/pocos-lumiar-banhos-naturais-guia-completo" element={<PocosDeLumiar />} />
+          <Route path="/lumiar-cachoeiras-guia" element={<LumiarWaterfallsGuide />} /> {/* Nova rota */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
