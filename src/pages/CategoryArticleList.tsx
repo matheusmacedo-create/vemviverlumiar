@@ -39,6 +39,15 @@ const dummyArticles: {
     posts: [
       {
         image: '/placeholder.svg',
+        title: 'Lumiar Além das Cachoeiras: 5 Segredos que Vão Mudar Sua Viagem',
+        description: 'Descubra as facetas inesperadas de Lumiar, um destino de múltiplas camadas que vai muito além da beleza natural.',
+        category: 'Natureza & Aventura',
+        rating: 4.9,
+        badges: [{ type: 'novo', text: 'Novo' }],
+        href: '/lumiar-alem-das-cachoeiras-5-segredos',
+      },
+      {
+        image: '/placeholder.svg',
         title: 'Lumiar, Nova Friburgo: O Guia Definitivo das 7 Cachoeiras Mais Espetaculares',
         description: 'Descubra os segredos mais bem guardados da Serra Fluminense com quem realmente conhece cada trilha, cada poço e cada cantinho mágico de Lumiar.',
         category: 'Natureza & Aventura',

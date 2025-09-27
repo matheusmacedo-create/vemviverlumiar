@@ -22,12 +22,13 @@ import WellnessAndRelaxation from "./pages/WellnessAndRelaxation";
 import LocalShopping from "./pages/LocalShopping";
 import NatureAndAdventureContent from "./pages/NatureAndAdventureContent";
 import CategoryArticleList from "./pages/CategoryArticleList";
-import EncontroDosRios from "./pages/EncontroDosRios"; // Nova importação
-import CachoeiraIndianaJones from "./pages/CachoeiraIndianaJones"; // Nova importação
-import CachoeiraTocaDaOnca from "./pages/CachoeiraTocaDaOnca"; // Nova importação
-import TrilhaPedraRiscada from "./pages/TrilhaPedraRiscada"; // Nova importação
-import PocosDeLumiar from "./pages/PocosDeLumiar"; // Nova importação
-import LumiarWaterfallsGuide from "./pages/LumiarWaterfallsGuide"; // Nova importação
+import EncontroDosRios from "./pages/EncontroDosRios";
+import CachoeiraIndianaJones from "./pages/CachoeiraIndianaJones";
+import CachoeiraTocaDaOnca from "./pages/CachoeiraTocaDaOnca";
+import TrilhaPedraRiscada from "./pages/TrilhaPedraRiscada";
+import PocosDeLumiar from "./pages/PocosDeLumiar";
+import LumiarWaterfallsGuide from "./pages/LumiarWaterfallsGuide";
+import LumiarBeyondWaterfalls from "./pages/LumiarBeyondWaterfalls"; // Nova importação
 
 const queryClient = new QueryClient();
 
@@ -64,7 +65,8 @@ const App = () => (
           <Route path="/cachoeira-toca-da-onca-lumiar-paraiso-aquatico" element={<CachoeiraTocaDaOnca />} />
           <Route path="/trilha-pedra-riscada-lumiar-vista-panoramica" element={<TrilhaPedraRiscada />} />
           <Route path="/pocos-lumiar-banhos-naturais-guia-completo" element={<PocosDeLumiar />} />
-          <Route path="/lumiar-cachoeiras-guia" element={<LumiarWaterfallsGuide />} /> {/* Nova rota */}
+          <Route path="/lumiar-cachoeiras-guia" element={<LumiarWaterfallsGuide />} />
+          <Route path="/lumiar-alem-das-cachoeiras-5-segredos" element={<LumiarBeyondWaterfalls />} /> {/* Nova rota */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
